@@ -1,0 +1,102 @@
+.intro-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 90vh;
+  
+    
+  
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      padding: 20px;
+      max-width: 1200px;
+      background: white;
+     
+  
+      .image-section {
+        flex: 1;
+        padding: 20px;
+      }
+  
+      .text-section {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+  
+        h2 {
+          font-size: 1.8rem;
+          margin-bottom: 10px;
+          color: #333;
+        }
+  
+        p {
+          margin-bottom: 20px;
+          color: #666;
+        }
+  
+        .start-btn {
+          padding: 10px 20px;
+          background-color: #FFD700;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+  
+          &:hover {
+            background-color: #FFC300;
+          }
+        }
+      }
+    }
+  
+  
+  }
+  .hexagon-image {
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+    clip-path: polygon(
+      25% 7%, 75% 7%, 
+      93% 50%, 75% 93%, 
+      25% 93%, 7% 50%
+    );
+    transform: rotate(-20deg); /* Rotated 20 degrees to the left */
+    mask-image: radial-gradient(circle, white 90%, transparent 100%);
+  border-radius: 15px; /* This will work now */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    &:hover {
+      transform: scale(1.05) rotate(-20deg);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+  .hexagon-image {
+  @media (max-width: 992px) {
+   
+        width: 420px;
+        height: 420px;
+    
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    
+        width: 400px;
+        height: 400px;
+    
+}
+
+/* Small Mobile View */
+@media (max-width: 480px) {
+    width: 260px;
+    height: 260px;
+}
+}
+  
+  

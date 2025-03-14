@@ -1,0 +1,28 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .questionnaire {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+  
+    .progress {
+      background-color: #ffc107;
+      height: 100%;
+      border-radius: 4px;
+    }
+  }
+  
+  .navigation-buttons {
+    text-align: right;
+  }
+  

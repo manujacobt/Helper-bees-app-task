@@ -3,13 +3,27 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { IntroComponent } from './intro/intro.component';
+import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    HeaderComponent,
+    IntroComponent,
+    QuestionnaireComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [

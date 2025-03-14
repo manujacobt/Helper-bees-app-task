@@ -1,0 +1,19 @@
+<div class="login-page"> 
+  
+  <div class="container mt-5">
+    <div class="card p-4">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-3">
+          <label>Username</label>
+          <input type="text" formControlName="username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>
