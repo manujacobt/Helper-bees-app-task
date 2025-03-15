@@ -10,6 +10,7 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
+import { LaststepComponent } from './laststep/laststep.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     IntroComponent,
     QuestionnaireComponent,
-    FooterComponent
+    FooterComponent,
+    LaststepComponent
   ],
   imports: [
     BrowserModule,

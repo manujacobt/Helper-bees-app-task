@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-questionnaire',
@@ -23,7 +25,7 @@ export class QuestionnaireComponent {
     'I only watch Criterion Collection films at Arthouse theaters that disallow snacks because there might be a crinkling sound that disrupts other patrons.'
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.questionnaireForm = this.fb.group({
       selectedGenres: this.fb.array([]),
       experience: [''],
@@ -77,12 +79,24 @@ export class QuestionnaireComponent {
   }
 
   onNext() {
+    console.log(this.questionnaireForm.value);
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;
       this.updateProgress();
     }
-    console.log(this.questionnaireForm.value);
+    else {
+      const username = typeof localStorage !== 'undefined' ? localStorage.getItem('username') : null;
+      Swal.fire({
+        icon: 'success',
+        title: 'Assessment Completed!',
+        text: `Thank you, ${username}!`,
+        timer: 2000,
+        showConfirmButton: false
+      });
+      this.router.navigate(['/laststep']);
+    }
   }
+
 
   onPrevious() {
     if (this.currentStep > 1) {
