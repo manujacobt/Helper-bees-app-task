@@ -1,28 +1,73 @@
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-  }
+.questionnaire{
+  min-height: 85vh;
+  padding: 8% 10%;
+}
+.container-fluid {
+ 
+  margin: auto;
+  background: #fdf2e9;
   
-  .questionnaire {
-    background-color: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .progress-bar {
-    background-color: #e0e0e0;
-    height: 8px;
+  border-radius: 12px;
+ 
+}
+
+.header img {
+  width: 180px;
+  margin-bottom: 20px;
+}
+.btn-transparent-border {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.btn-transparent-border:hover {
+  background-color: black;
+  color: white;
+}
+.question-container {
+  margin-bottom: 3%; /* Adds 3% margin after each question */
+}
+
+.question-container h4,
+.question-container p {
+  margin-bottom: 1.5%; /* Adds some space between question and options */
+}
+
+.question-container label {
+  display: block; /* Ensures that each option is on a new line */
+  margin-bottom: 1%; /* Adds space between options */
+}
+
+.question-container .movie-input-group {
+  margin-bottom: 3%; /* Adds space between the movie title and year input */
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  height: 15px;
+  border-radius: 4px;
+  position: relative;
+
+  .progress {
+    background-color: #2ecc71;
+    height: 100%;
     border-radius: 4px;
-  
-    .progress {
-      background-color: #ffc107;
-      height: 100%;
-      border-radius: 4px;
-    }
+    transition: width 0.3s;
   }
-  
-  .navigation-buttons {
-    text-align: right;
-  }
-  
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -1,37 +1,133 @@
-<div class="container mt-5">
-    <div class="questionnaire">
-      <div class="header">
-        <img src="./assets/the-helper-bees-logo.png" alt="The Helper Bees">
-      </div>
-  
-      <!-- Progress Bar -->
-      <div class="progress-bar mt-3 mb-4">
-        <div class="progress" [style.width.%]="progressValue"></div>
-      </div>
-  
-      <!-- Question Title -->
-      <div class="question-title">
-        <h4>My favorite movie genre is:</h4>
-        <p>(Check all that apply)</p>
-      </div>
-  
-      <!-- Question Form -->
+<div class="container-fluid">
+  <div class="questionnaire">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar mt-4 mb-1">
+      <div class="progress" [style.width.%]="progressValue"></div>       
+    </div>
+    <div class="mb-4">{{ currentStep }} of {{ totalSteps }}</div>
+
+    <!-- Question Steps -->
+    <div *ngIf="currentStep === 1" class="question-container">
+      <h4>My favorite movie genre is:</h4>
+      <p>(Check all that apply)</p>
       <form [formGroup]="questionnaireForm">
-        <div *ngFor="let genre of genres">
+        <div class="row">
+          <!-- First Row of 6 genres -->
+          <div class="col-12 col-lg-6">
+            <div *ngFor="let genre of genres.slice(0, 6)" class="genre-option">
+              <label>
+                <input type="checkbox" [value]="genre" (change)="onCheckboxChange($event, selectedGenres)">
+                {{ genre }}
+              </label>
+            </div>
+          </div>
+    
+          <!-- Second Row of 6 genres -->
+          <div class="col-12 col-lg-6">
+            <div *ngFor="let genre of genres.slice(6)" class="genre-option">
+              <label>
+                <input type="checkbox" [value]="genre" (change)="onCheckboxChange($event, selectedGenres)">
+                {{ genre }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+
+    <div *ngIf="currentStep === 2" class="question-container">
+      <h4>How long have you been an Angular developer?</h4>
+      <form [formGroup]="questionnaireForm">
+        <div *ngFor="let exp of experiences">
           <label>
-            <input type="checkbox" [value]="genre" (change)="onCheckboxChange($event)">
-            {{ genre }}
+            <input type="radio" name="experience" [value]="exp" (change)="onRadioChange('experience', exp)">
+            {{ exp }}
           </label>
         </div>
       </form>
-  
-      <!-- Navigation Buttons -->
-      <div class="navigation-buttons mt-4">
-        <button class="btn btn-warning" (click)="onNext()">Next</button>
-      </div>
-  
-      <!-- Footer -->
-      <app-footer></app-footer>
     </div>
+
+    <div *ngIf="currentStep === 3" class="question-container">
+      <h4>What is your favorite movie snack?</h4>
+      <form [formGroup]="questionnaireForm">
+        <div *ngFor="let snack of movieSnacks">
+          <label>
+            <input type="radio" name="favoriteSnack" [value]="snack" (change)="onRadioChange('favoriteSnack', snack)">
+            {{ snack }}
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="currentStep === 4" class="question-container">
+      <div class="question-header">
+        <h2>What is your favorite movie?</h2>
+        <p>(If you have more than one favorite movie, select <strong>Add Favorite Movie</strong> to enter its details.)</p>
+      </div>
+
+      <form [formGroup]="questionnaireForm">
+        <div formArrayName="favoriteMovies">
+          <div *ngFor="let movie of favoriteMovies.controls; let i = index" [formGroupName]="i" class="movie-input-group row">
+            <div class="col-12 col-lg-5">
+              <label>Title</label>
+              <input formControlName="title" placeholder="Movie Title" class="form-control mb-2">
+            </div>
+
+            <div class="col-12 col-lg-5 offset-lg-2">
+              <label>Year of Release</label>
+              <input formControlName="year" placeholder="Year" class="form-control mb-2">
+            </div>
+
+            <div *ngIf="i > 0" class="col-12 mt-2">
+              <button class="btn btn-link" (click)="removeFavoriteMovie(i)">Remove</button>
+            </div>
+          </div>
+        </div>    
+        <button class="btn btn-transparent-border mt-3" (click)="addFavoriteMovie()">Add Favorite Movie</button>
+      </form>
+    </div>
+
+    <div *ngIf="currentStep === 5" class="question-container2">
+      <h4>What is Jerry Seinfeld's address in Seinfeld?</h4>
+      <form [formGroup]="questionnaireForm">
+        <div formGroupName="address"> 
+        <div class="row col-md-8" style="padding-left: 0.5%; padding-right: 1%;">
+          <label class="mb-1">Address 1</label>          
+          <input formControlName="address1" type="text" placeholder="Address 1" class="form-control">
+        </div>
+        <div style="padding-top: 2%;padding-left: 0.5%;  padding-right: 1%;" class="row col-md-8">
+          <label class="mb-1">Address 2</label>
+          <input formControlName="address2" type="text" placeholder="Address 2" class="form-control">
+        </div>
+        <div class="row  col-md-8 mt-4">
+          <div class="col-12 col-md-4">
+            <label class="mb-1 mx-2">City</label>
+            <input formControlName="city" type="text" placeholder="City" class="form-control">
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="mb-1 mx-2">State</label>
+            <input formControlName="state" type="text" placeholder="State" class="form-control">
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="mb-1 mx-2">Zip Code</label>
+            <input formControlName="zipCode" type="text" placeholder="Zip code" class="form-control">
+          </div>
+        </div>
+        
+        </div>
+      </form>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons mt-4">
+      <button class="btn btn-secondary" (click)="onPrevious()" [disabled]="currentStep === 1">Previous</button>
+      <button class="btn btn-warning" (click)="onNext()" *ngIf="currentStep <= totalSteps">Next</button>
+    </div>
+
+    <!-- Footer -->
+   
   </div>
-  
+  <app-footer></app-footer>
+</div>
